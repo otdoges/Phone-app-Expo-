@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { supabase } from '../../lib/supabase';
 
+const supabaseUrl = process.env.VITE_SUPABASE_URL ?? '';
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY ?? '';
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Required environment variables VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are not set');
+}
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
